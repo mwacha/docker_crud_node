@@ -1,0 +1,18 @@
+<form name="form1" action="updateControllerForm" method="put">
+     {{#data}}
+    <div> <h1>Create Person</h1></div>
+    <div>
+        <label for="nome">Registration:</label>
+         <input type="hiden" name="id" id="id" value='{{id}}'>
+         <input type="text" id="name" placeholder="Enter the person's name">
+    </div>
+     <div>
+        <label for="nome">Name:</label>
+         <input type="text" id="name" placeholder="Enter the person's name">
+    </div>
+    <div id="outer">
+        <input type="submit" class="button button1" value="Create">
+        <input type="button" class="button button2" onclick="location.href='/';" value="Back" />
+    </div>   
+    {{/data}}         
+</form>

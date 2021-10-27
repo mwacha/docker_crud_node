@@ -1,0 +1,46 @@
+version: "3.3"
+services:
+  nodeserver:
+    build:
+      context: node
+      dockerfile: Dockerfile
+    container_name: node
+    image: mwacha/nodeserver
+    entrypoint: dockerize -wait tcp://database:3306 -timeout 20s node app.js
+    networks:
+      - mwachanet
+    tty: true
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+
+  database:
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    container_name: database
+    restart: always
+    tty: true
+    volumes:
+      - ./script/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - mwachanet
+
+  nginxserver:
+    build:
+      context: nginx
+      dockerfile: Dockerfile
+    container_name: nginx
+    image: mwacha/nginx
+    networks:
+      - mwachanet
+    ports:
+      - "8080:80"
+    depends_on:
+      - nodeserver
+
+networks:
+  mwachanet:
+    driver: bridge
