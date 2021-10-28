@@ -33,11 +33,11 @@ app.get("/", function (req, res) {
 
 app.get("/select:id?", function (req, res) {
   if (!req.params.id) {
-    connection.query("select * from person order by person_name", function (err, results) {
+    connection.query("select * from people order by people_name", function (err, results) {
       res.render("select", { data: results });
     });
   } else {
-    connection.query("select * from person where id = ?", [req.params.id], function (results) {
+    connection.query("select * from people where id = ?", [req.params.id], function (results) {
       res.render("select", { data: results });
     });
   }
@@ -51,23 +51,23 @@ app.get("/create", function (req, res) {
 });
 
 app.post("/createControllerForm", urlencodeParser, function (req, res) {
-  connection.query("insert into person (person_name) values(?)", [req.body.name]);
+  connection.query("insert into people (people_name) values(?)", [req.body.name]);
   res.render('createControllerForm', { name: req.body.name });
 });
 
 app.get("/update/:id", urlencodeParser, function (req, res) {
-  connection.query("select * from person where id =?", [req.params.id], function (err, results) {
+  connection.query("select * from people where id =?", [req.params.id], function (err, results) {
     res.render("update", { data: results });
   });
 });
 
 app.post("/update/updateControllerForm", urlencodeParser, function (req, res) {
-  connection.query("update person set person_name = ? where id = ?", [req.body.name, req.body.id]);
+  connection.query("update people set people_name = ? where id = ?", [req.body.name, req.body.id]);
   res.render("updateControllerForm");
 });
 
 app.get("/remove/:id", function (req, res) {
-  connection.query("delete from person where id =?", [req.params.id]);
+  connection.query("delete from people where id =?", [req.params.id]);
   res.render("remove");
 });
 

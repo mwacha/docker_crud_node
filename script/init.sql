@@ -2,9 +2,9 @@ CREATE DATABASE persondb;
 
 USE persondb;
 
-CREATE TABLE person (
+CREATE TABLE people (
     id integer not null auto_increment,    
-    person_name varchar(200),
+    people_name varchar(200),
     PRIMARY KEY (id)
 );
 
