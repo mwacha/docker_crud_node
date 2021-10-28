@@ -1,6 +1,6 @@
 <h1>Person List</h1>
-  <div id="outer_right">
-         <input type="button" class="button button1" onclick="location.href='create';" value="Create" />
+  <div id="outer_right">  
+         <input type="button" class="button button2" onclick="location.href='/';" value="Back" />
 </div>    
 
 <table id="persons">
@@ -12,16 +12,11 @@
     {{#data}}
      <tr>
            <td>{{id}}</td>
-            <td>{{name}}</td>
+            <td>{{person_name}}</td>
             <td>
-                <a href="/update/{{id}}"><img src="/img/Editar.png" class="btnAcao"></a>
-                <a href="/deletar/{{id}}" class="deletar"><img src="/img/Deletar.png" class="btnAcao"></a>
+                <a href="/update/{{id}}">Edit</a>
+                <a href="/remove/{{id}}">Remove</a>
             </td>        
         </tr>
         {{/data}}
-         <tr>
-        <td colspan="3">
-            <input type="button" onclick="location.href='create';" value="Adicionar Aluno" />
-        </td>
-    </tr>
 </table>
